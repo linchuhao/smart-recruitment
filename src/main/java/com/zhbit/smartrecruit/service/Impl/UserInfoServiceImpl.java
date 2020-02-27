@@ -93,7 +93,6 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoDao, UserInfoEntity
         if (enterpriseEntity == null){
             EnterpriseEntity newEnterprise = new EnterpriseEntity();
             newEnterprise.setEnterpriseName(enterpriseName);
-            newEnterprise.setEnterpriseIsActive(true);
             enterpriseDao.insert(newEnterprise);
             return newEnterprise.getEnterpriseId();
         }

@@ -27,4 +27,6 @@ public class EnterpriseEntity {
     private String enterpriseIntroduction;
 
     private boolean enterpriseIsActive;
+
+    private boolean enterpriseIsHot;
 }

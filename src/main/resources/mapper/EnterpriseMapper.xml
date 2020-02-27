@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zhbit.smartrecruit.dao.EnterpriseDao">
-
-    <!--    <select id="selectUserInfoByGtFraction" resultType="com.zhbit.smartrecruit.data.entity.UserTestEntity" parameterType="long">
-            SELECT * FROM user_info WHERE fraction > #{fraction}
-        </select>-->
+    <resultMap type="com.zhbit.smartrecruit.data.vo.EnterpriseVo" id="simpleEnterprise">
+        <id column="enterprise_id" property="enterpriseId"/>
+        <result column="enterprise_name" property="enterpriseName"/>
+        <result column="enterprise_logo" property="enterpriseLogo"/>
+        <result column="enterprise_is_hot" property="enterpriseIsHot"/>
+    </resultMap>
+        <select id="getAllEnterprise" resultMap="simpleEnterprise">
+            SELECT enterprise_id,enterprise_name,enterprise_logo,enterprise_is_hot FROM enterprise
+        </select>
 
 </mapper>

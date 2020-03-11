@@ -46,7 +46,6 @@ public class AppliacntInfoServiceImpl extends ServiceImpl<ApplicantDao, Applican
         applicantInfoEntity.setApplicantInfoIntroduction(applicantInfo.getApplicantInfoIntroduction());
         applicantInfoEntity.setApplicantInfoEducation(applicantInfo.getApplicantInfoEducation());
         applicantInfoEntity.setApplicantInfoSchool(applicantInfo.getApplicantInfoSchool());
-        applicantInfoEntity.setApplicantInfoImg(applicantInfo.getApplicantInfoImg());
         applicantInfoEntity.setApplicantInfoResume(applicantInfo.getApplicantInfoResume());
         boolean result = this.baseMapper.updateById(applicantInfoEntity) > 0;
         if (result) {

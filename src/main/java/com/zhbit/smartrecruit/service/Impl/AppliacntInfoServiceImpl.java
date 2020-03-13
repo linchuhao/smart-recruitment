@@ -62,20 +62,40 @@ public class AppliacntInfoServiceImpl extends ServiceImpl<ApplicantDao, Applican
         File dest = new File(path);
         try {
             avatar.transferTo(dest);
-            return storeAvatar(fileName,userId);
+            String relativePath = "static/avatar/" + fileName;
+            return saveFilePath("avatar",relativePath,userId);
         } catch (IOException e) {
             return ResponseMessage.failedMessage();
         }
     }
 
-    private ResponseMessage storeAvatar(String fileName, Long userId) {
+    public ResponseMessage uploadApplicantInfoResume(MultipartFile resume, Long userId) {
+        String fileName = resume.getOriginalFilename();
+        String path = "E:/毕设/前端/my-project/static/resume/" + fileName;
+        File dest = new File(path);
+        try {
+            resume.transferTo(dest);
+            String relativePath = "static/resume/" + fileName;
+            return saveFilePath("resume",relativePath,userId);
+        }catch (IOException e) {
+            return ResponseMessage.failedMessage();
+        }
+    }
+
+    private ResponseMessage saveFilePath(String type, String relativePath, Long userId) {
         ApplicantInfoEntity applicantInfoEntity = new ApplicantInfoEntity();
         applicantInfoEntity.setApplicantInfoId(userId);
-        applicantInfoEntity.setApplicantInfoImg("static/avatar/" + fileName);
+        if (type.equals("avatar")) {
+            applicantInfoEntity.setApplicantInfoImg(relativePath);
+        }
+        if (type.equals("resume")) {
+            applicantInfoEntity.setApplicantInfoResume(relativePath);
+        }
         boolean result = this.baseMapper.updateById(applicantInfoEntity) > 0;
         if (result) {
             return ResponseMessage.successMessage();
         }
         return ResponseMessage.failedMessage();
     }
+
 }

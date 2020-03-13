@@ -35,4 +35,10 @@ public class ApplicantInfoController {
     public ResponseMessage uploadApplicantInfoAvatar(@RequestParam MultipartFile avatar, @RequestParam Long userId) {
         return applicantInfoService.uploadApplicantInfoAvatar(avatar,userId);
     }
+
+    @PostMapping("/uploadApplicantInfoResume")
+    @ApiOperation("上传应聘者简历")
+    public ResponseMessage uploadApplicantInfoResume(@RequestParam MultipartFile resume, @RequestParam Long userId) {
+        return applicantInfoService.uploadApplicantInfoResume(resume,userId);
+    }
 }

@@ -14,4 +14,6 @@ public interface ApplicantInfoService extends IService<ApplicantInfoEntity> {
 
     ResponseMessage uploadApplicantInfoAvatar(MultipartFile avatar, Long userId);
 
+    ResponseMessage uploadApplicantInfoResume(MultipartFile avatar, Long userId);
+
 }

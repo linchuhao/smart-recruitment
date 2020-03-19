@@ -19,7 +19,7 @@ public class ApplicantInfo {
     /*
       大专
       本科
-      研究生
+      硕士
     */
     private String applicantInfoEducation;
 

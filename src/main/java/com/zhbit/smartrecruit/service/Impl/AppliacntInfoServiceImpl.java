@@ -1,6 +1,5 @@
 package com.zhbit.smartrecruit.service.Impl;
 
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zhbit.smartrecruit.dao.ApplicantDao;
 import com.zhbit.smartrecruit.data.dto.ApplicantInfo;

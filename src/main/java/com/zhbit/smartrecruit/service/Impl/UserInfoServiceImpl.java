@@ -85,7 +85,7 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoDao, UserInfoEntity
     否则新建记录并返回新id
     *
     */
-    private Long searchEnterprise(String enterpriseName) {
+    public Long searchEnterprise(String enterpriseName) {
         //SELECT * FROM enterprise WHERE enterprise.enterpriseName = ?
         QueryWrapper<EnterpriseEntity> queryWrapper = new QueryWrapper<>();
         queryWrapper.lambda().eq(EnterpriseEntity::getEnterpriseName,enterpriseName);

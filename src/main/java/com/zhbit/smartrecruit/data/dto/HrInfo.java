@@ -1,20 +1,17 @@
-package com.zhbit.smartrecruit.data.entity;
+package com.zhbit.smartrecruit.data.dto;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 @Data
-@TableName("hr_info")
-public class HrInfoEntity {
+public class HrInfo {
 
-    @TableId(type = IdType.NONE)
     private Long hrInfoId;
 
     private Long hrInfoEnterpriseId;
 
     private String hrInfoProperty;
+
+    private String hrInfoEnterpriseName;
 
     private String hrInfoName;
 
@@ -23,18 +20,17 @@ public class HrInfoEntity {
     private String hrInfoEmail;
 
     private String hrInfoSchool;
-
+    /*
+      大专
+      本科
+      硕士
+    */
     private String hrInfoEducation;
 
     private String hrInfoSex;
 
-    private String hrInfoAge;
-
     private String hrInfoImg;
-
-    private String hrInfoCity;
 
     private String hrInfoIntroduction;
 
-    private boolean hrInfoIsActive;
 }

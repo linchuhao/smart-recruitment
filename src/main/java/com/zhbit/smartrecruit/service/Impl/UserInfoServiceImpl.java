@@ -35,11 +35,14 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoDao, UserInfoEntity
     public ResponseMessage register(UserInfo userInfo) {
         boolean existUser = existUser(userInfo);
         if (!existUser) {
+            Long userId;
             if (1 == userInfo.getRole()) {
-                applicantRegister(userInfo);
+                userId = applicantRegister(userInfo);
+                userInfo.setUserId(userId);
             }
             if (2 == userInfo.getRole()) {
-                hrRegister(userInfo);
+                userId = hrRegister(userInfo);
+                userInfo.setUserId(userId);
             }
             return ResponseMessage.successMessage(userInfo);
         }
@@ -99,7 +102,7 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoDao, UserInfoEntity
         return enterpriseEntity.getEnterpriseId();
     }
 
-    private void applicantRegister(UserInfo userInfo) {
+    private Long applicantRegister(UserInfo userInfo) {
         Long userInfoId = createUser(userInfo);
         ApplicantInfoEntity applicantInfoEntity = new ApplicantInfoEntity();
         applicantInfoEntity.setApplicantInfoId(userInfoId);
@@ -108,9 +111,10 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoDao, UserInfoEntity
         applicantInfoEntity.setApplicantInfoEmail(userInfo.getEmail());
         applicantInfoEntity.setApplicantInfoIsActive(true);
         applicantDao.insert(applicantInfoEntity);
+        return userInfoId;
     }
 
-    private void hrRegister(UserInfo userInfo) {
+    private Long hrRegister(UserInfo userInfo) {
         Long userInfoId = createUser(userInfo);
         HrInfoEntity hrInfoEntity = new HrInfoEntity();
         if (StringUtils.isNotEmpty(userInfo.getEnterpriseName())) {
@@ -123,6 +127,7 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoDao, UserInfoEntity
         hrInfoEntity.setHrInfoEmail(userInfo.getEmail());
         hrInfoEntity.setHrInfoIsActive(true);
         hrInfoDao.insert(hrInfoEntity);
+        return userInfoId;
     }
 
     private Long createUser(UserInfo userInfo) {
@@ -131,6 +136,10 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoDao, UserInfoEntity
         userInfoEntity.setUserInfoPassword(userInfo.getPassword());
         userInfoEntity.setUserInfoRole(userInfo.getRole());
         userInfoEntity.setUserInfoIsActive(true);
+        /*
+        此处的uuid为自增的，My-Batis先在实体类（执行体）上产生自增uuid后再执行insert方法，
+        因此可以通过实体类获得它产生的自增uuid
+         */
         this.baseMapper.insert(userInfoEntity);
         return userInfoEntity.getUserInfoId();
     }

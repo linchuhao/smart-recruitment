@@ -6,6 +6,7 @@ import com.zhbit.smartrecruit.dao.HrInfoDao;
 import com.zhbit.smartrecruit.data.dto.HrInfo;
 import com.zhbit.smartrecruit.data.entity.ApplicantInfoEntity;
 import com.zhbit.smartrecruit.data.entity.HrInfoEntity;
+import com.zhbit.smartrecruit.data.vo.ReceiveRecordVo;
 import com.zhbit.smartrecruit.data.vo.ResponseMessage;
 import com.zhbit.smartrecruit.service.HrInfoService;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 @Service
 public class HrInfoServiceImpl extends ServiceImpl<HrInfoDao, HrInfoEntity> implements HrInfoService {
@@ -86,5 +88,14 @@ public class HrInfoServiceImpl extends ServiceImpl<HrInfoDao, HrInfoEntity> impl
             return ResponseMessage.successMessage();
         }
         return ResponseMessage.failedMessage();
+    }
+
+    public ResponseMessage getReceiveRecord(Long userId) {
+        List<ReceiveRecordVo> receiveRecord;
+        receiveRecord = this.baseMapper.getReceiveRecord(userId);
+        if (receiveRecord.isEmpty()) {
+            return ResponseMessage.failedMessage("没有记录!");
+        }
+        return ResponseMessage.successMessage(receiveRecord);
     }
 }

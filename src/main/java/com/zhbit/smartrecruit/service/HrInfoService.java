@@ -13,4 +13,6 @@ public interface HrInfoService extends IService<HrInfoEntity> {
     ResponseMessage updateHrInfo(HrInfo hrrInfo);
 
     ResponseMessage uploadHrInfoAvatar(MultipartFile avatar, Long userId);
+
+    ResponseMessage getReceiveRecord(Long userId);
 }

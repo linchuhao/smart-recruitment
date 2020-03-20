@@ -22,6 +22,12 @@ public class HrInfoController {
         return hrInfoService.getHrInfo(userId);
     }
 
+    @GetMapping("/getReceiveRecord")
+    @ApiOperation("简历接收记录")
+    public ResponseMessage getReceiveRecord(@RequestParam Long userId) {
+        return hrInfoService.getReceiveRecord(userId);
+    }
+
     @PostMapping("/updateHrInfo")
     @ApiOperation("修改HR信息")
     public ResponseMessage updateHrInfo(@RequestBody HrInfo hrInfo) {
@@ -33,4 +39,5 @@ public class HrInfoController {
     public ResponseMessage uploadHrInfoAvatar(@RequestParam MultipartFile avatar, @RequestParam Long userId) {
         return hrInfoService.uploadHrInfoAvatar(avatar,userId);
     }
+
 }

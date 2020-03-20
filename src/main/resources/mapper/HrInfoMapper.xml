@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zhbit.smartrecruit.dao.HrInfoDao">
-
+    <resultMap type="com.zhbit.smartrecruit.data.vo.ReceiveRecordVo" id="receiveRecord">
+        <id column="job_name" property="jobName"/>
+        <result column="applicant_info_name" property="applicantInfoName"/>
+        <result column="applicant_info_Resume" property="applicantInfoResume"/>
+        <result column="applicant_info_school" property="applicantInfoSchool"/>
+        <result column="applicant_info_Education" property="applicantInfoEducation"/>
+        <result column="delivery_datetime" property="deliveryDatetime"/>
+    </resultMap>
+    <select id="getReceiveRecord" resultMap="receiveRecord">
+        select  job.job_name,a.applicant_info_name,a.applicant_info_school,a.applicant_info_education,a.applicant_info_resume,temp.delivery_Datetime from job
+        join
+        (
+        select * from mapping_applicant_job where mapping_applicant_job.job_id in (select job_id from job where job.job_from = #{userId})
+        ) as temp
+        join applicant_info as a
+        join hr_info as hr
+        on a.applicant_info_id = temp.applicant_info_id
+        and hr.hr_info_id = job.job_from
+        and job.job_id = temp.job_id
+        order by temp.delivery_Datetime desc
+    </select>
 
 </mapper>

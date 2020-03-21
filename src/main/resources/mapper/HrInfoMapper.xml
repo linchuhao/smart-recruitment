@@ -7,10 +7,11 @@
         <result column="applicant_info_Resume" property="applicantInfoResume"/>
         <result column="applicant_info_school" property="applicantInfoSchool"/>
         <result column="applicant_info_Education" property="applicantInfoEducation"/>
+        <result column="applicant_info_Major" property="applicantInfoMajor"/>
         <result column="delivery_datetime" property="deliveryDatetime"/>
     </resultMap>
     <select id="getReceiveRecord" resultMap="receiveRecord">
-        select  job.job_name,a.applicant_info_name,a.applicant_info_school,a.applicant_info_education,a.applicant_info_resume,temp.delivery_Datetime from job
+        select  job.job_name,a.applicant_info_name,a.applicant_info_school,a.applicant_info_education,applicant_info_major,a.applicant_info_resume,temp.delivery_Datetime from job
         join
         (
         select * from mapping_applicant_job where mapping_applicant_job.job_id in (select job_id from job where job.job_from = #{userId})

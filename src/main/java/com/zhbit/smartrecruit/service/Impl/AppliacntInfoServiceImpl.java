@@ -29,6 +29,7 @@ public class AppliacntInfoServiceImpl extends ServiceImpl<ApplicantDao, Applican
         applicantInfo.setApplicantInfoEducation(applicantInfoEntity.getApplicantInfoEducation());
         applicantInfo.setApplicantInfoSchool(applicantInfoEntity.getApplicantInfoSchool());
         applicantInfo.setApplicantInfoImg(applicantInfoEntity.getApplicantInfoImg());
+        applicantInfo.setApplicantInfoMajor(applicantInfoEntity.getApplicantInfoMajor());
         applicantInfo.setApplicantInfoResume(applicantInfoEntity.getApplicantInfoResume());
         return applicantInfo;
     }
@@ -45,6 +46,7 @@ public class AppliacntInfoServiceImpl extends ServiceImpl<ApplicantDao, Applican
         applicantInfoEntity.setApplicantInfoIntroduction(applicantInfo.getApplicantInfoIntroduction());
         applicantInfoEntity.setApplicantInfoEducation(applicantInfo.getApplicantInfoEducation());
         applicantInfoEntity.setApplicantInfoSchool(applicantInfo.getApplicantInfoSchool());
+        applicantInfoEntity.setApplicantInfoMajor(applicantInfo.getApplicantInfoMajor());
         applicantInfoEntity.setApplicantInfoResume(applicantInfo.getApplicantInfoResume());
         boolean result = this.baseMapper.updateById(applicantInfoEntity) > 0;
         if (result) {

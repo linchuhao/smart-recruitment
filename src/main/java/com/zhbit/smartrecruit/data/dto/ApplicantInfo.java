@@ -28,7 +28,9 @@ public class ApplicantInfo {
     private String applicantInfoSex;
 
     private String applicantInfoImg;
-
+    //专业
+    private String applicantInfoMajor;
+    //职位
     private String applicantInfoProperty;
 
     private String applicantInfoResume;

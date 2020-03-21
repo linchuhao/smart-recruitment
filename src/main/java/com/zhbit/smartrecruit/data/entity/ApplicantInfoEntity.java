@@ -40,7 +40,9 @@ public class ApplicantInfoEntity {
     private String applicantInfoImg;
 
     private String applicantInfoCity;
-
+    //专业
+    private String applicantInfoMajor;
+    //职位
     private String applicantInfoProperty;
 
     private String applicantInfoResume;

@@ -13,7 +13,7 @@
     <resultMap type="com.zhbit.smartrecruit.data.vo.JobDeliveryRecordVo" id="jobDeliveryRecord">
         <id column="job_name" property="jobName"/>
         <result column="job_name" property="jobName"/>
-        <result column="job_property" property="jobCity"/>
+        <result column="job_property" property="jobProperty"/>
         <result column="job_min_salary" property="jobMinSalary"/>
         <result column="job_max_salary" property="jobMaxSalary"/>
         <result column="job_city" property="jobCity"/>

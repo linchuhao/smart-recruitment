@@ -12,12 +12,12 @@ public class JobDeliveryRecordVo {
 
     public String jobProperty;
 
-    public String jobMinSalary;
+    public int jobMinSalary;
 
-    public String jobMaxSalary;
+    public int jobMaxSalary;
 
     public String jobCity;
-    
+
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     public LocalDateTime jobDatetime;
 

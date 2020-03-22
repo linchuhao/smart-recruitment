@@ -18,7 +18,9 @@ public class JobEntity {
 
     private String jobFrom;
 
-    private String jobSalary;
+    private int jobMinSalary;
+
+    private int jobMaxSalary;
 
     private String jobAddress;
 

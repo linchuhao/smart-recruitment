@@ -10,6 +10,17 @@
         <result column="applicant_info_Major" property="applicantInfoMajor"/>
         <result column="delivery_datetime" property="deliveryDatetime"/>
     </resultMap>
+    <resultMap type="com.zhbit.smartrecruit.data.vo.JobDeliveryRecordVo" id="jobDeliveryRecord">
+        <id column="job_name" property="jobName"/>
+        <result column="job_name" property="jobName"/>
+        <result column="job_property" property="jobCity"/>
+        <result column="job_min_salary" property="jobMinSalary"/>
+        <result column="job_max_salary" property="jobMaxSalary"/>
+        <result column="job_city" property="jobCity"/>
+        <result column="job_datetime" property="jobDatetime"/>
+        <result column="job_requirement" property="jobRequirement"/>
+        <result column="delivery_count" property="deliveryCount"/>
+    </resultMap>
     <select id="getReceiveRecord" resultMap="receiveRecord">
         select  job.job_name,a.applicant_info_name,a.applicant_info_school,a.applicant_info_education,applicant_info_major,a.applicant_info_resume,temp.delivery_Datetime from job
         join
@@ -22,6 +33,23 @@
         and hr.hr_info_id = job.job_from
         and job.job_id = temp.job_id
         order by temp.delivery_Datetime desc
+    </select>
+    <select id="getJobDeliveryRecord" resultMap="jobDeliveryRecord">
+        select job.job_name,job.job_property,job.job_min_salary,job.job_max_salary,job.job_city,job.job_datetime,job.job_requirement,temp.delivery_count from job
+        join
+            (
+                select job.job_id,temp1.delivery_count from job
+                left join
+                (
+                    SELECT job_id, count(*) delivery_count FROM mapping_applicant_job
+                    group by job_id
+                )as temp1
+                on	job.job_id = temp1.job_id
+                where job.job_from = #{userId}
+            )as temp
+        on job.job_from = #{userId}
+        and job.job_id = temp.job_id
+        order by job.job_datetime desc;
     </select>
 
 </mapper>

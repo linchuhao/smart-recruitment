@@ -6,6 +6,7 @@ import com.zhbit.smartrecruit.dao.HrInfoDao;
 import com.zhbit.smartrecruit.data.dto.HrInfo;
 import com.zhbit.smartrecruit.data.entity.ApplicantInfoEntity;
 import com.zhbit.smartrecruit.data.entity.HrInfoEntity;
+import com.zhbit.smartrecruit.data.vo.JobDeliveryRecordVo;
 import com.zhbit.smartrecruit.data.vo.ReceiveRecordVo;
 import com.zhbit.smartrecruit.data.vo.ResponseMessage;
 import com.zhbit.smartrecruit.service.HrInfoService;
@@ -97,5 +98,13 @@ public class HrInfoServiceImpl extends ServiceImpl<HrInfoDao, HrInfoEntity> impl
             return ResponseMessage.failedMessage("没有记录!");
         }
         return ResponseMessage.successMessage(receiveRecord);
+    }
+    public ResponseMessage getJobDeliveryRecord(Long userId) {
+        List<JobDeliveryRecordVo> jobDeliveryRecord;
+        jobDeliveryRecord = this.baseMapper.getJobDeliveryRecord(userId);
+        if (jobDeliveryRecord.isEmpty()) {
+            return ResponseMessage.failedMessage("没有记录!");
+        }
+        return ResponseMessage.successMessage(jobDeliveryRecord);
     }
 }

@@ -23,6 +23,12 @@ public class ApplicantInfoController {
         return applicantInfoService.getApplicantInfo(userId);
     }
 
+    @GetMapping("/getResumeDeliveryRecord")
+    @ApiOperation("获取简历投递记录")
+    public ResponseMessage getResumeDeliveryRecord(@RequestParam Long userId) {
+        return applicantInfoService.getResumeDeliveryRecord(userId);
+    }
+
     @PostMapping("/updateApplicantInfo")
     @ApiOperation("修改应聘者信息")
     public ResponseMessage updateApplicantInfo(@RequestBody ApplicantInfo applicantInfo) {

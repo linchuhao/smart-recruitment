@@ -10,6 +10,8 @@ public interface ApplicantInfoService extends IService<ApplicantInfoEntity> {
 
     ApplicantInfo getApplicantInfo(Long userId);
 
+    ResponseMessage getResumeDeliveryRecord(Long userId);
+
     ResponseMessage updateApplicantInfo(ApplicantInfo applicantInfo);
 
     ResponseMessage uploadApplicantInfoAvatar(MultipartFile avatar, Long userId);

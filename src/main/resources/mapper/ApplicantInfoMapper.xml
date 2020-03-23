@@ -1,6 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zhbit.smartrecruit.dao.ApplicantDao">
-
-
+    <resultMap type="com.zhbit.smartrecruit.data.vo.ResumeDeliveryRecordVo" id="resumeDeliveryRecordVo">
+        <id column="job_id" property="jobId"/>
+        <result column="job_id" property="jobId"/>
+        <result column="job_name" property="jobName"/>
+        <result column="enterprise_name" property="enterpriseName"/>
+        <result column="job_property" property="jobProperty"/>
+        <result column="job_min_salary" property="jobMinSalary"/>
+        <result column="job_max_salary" property="jobMaxSalary"/>
+        <result column="job_city" property="jobCity"/>
+        <result column="delivery_datetime" property="deliveryDatetime"/>
+    </resultMap>
+    <select id="getResumeDeliveryRecord" resultMap="resumeDeliveryRecordVo">
+        SELECT
+            job.job_id,
+            enterprise.enterprise_name,
+            job.job_name,
+            job.job_property,
+            job.job_min_salary,
+            job.job_max_salary,
+            job.job_city,
+            mapping.delivery_datetime
+        FROM
+            applicant_info applicant
+                JOIN
+            mapping_applicant_job mapping ON applicant.applicant_info_id = mapping.applicant_info_id
+                JOIN
+            job ON job.job_id = mapping.job_id
+                JOIN
+            hr_info hr ON job.job_from = hr.hr_info_id
+                JOIN
+            enterprise ON hr.hr_info_enterprise_id = enterprise.enterprise_id
+        WHERE
+            applicant.applicant_info_id = #{userId}
+    </select>
 </mapper>

@@ -5,12 +5,14 @@ import com.zhbit.smartrecruit.dao.ApplicantDao;
 import com.zhbit.smartrecruit.data.dto.ApplicantInfo;
 import com.zhbit.smartrecruit.data.entity.ApplicantInfoEntity;
 import com.zhbit.smartrecruit.data.vo.ResponseMessage;
+import com.zhbit.smartrecruit.data.vo.ResumeDeliveryRecordVo;
 import com.zhbit.smartrecruit.service.ApplicantInfoService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 @Service
 public class AppliacntInfoServiceImpl extends ServiceImpl<ApplicantDao, ApplicantInfoEntity> implements ApplicantInfoService {
@@ -32,6 +34,15 @@ public class AppliacntInfoServiceImpl extends ServiceImpl<ApplicantDao, Applican
         applicantInfo.setApplicantInfoMajor(applicantInfoEntity.getApplicantInfoMajor());
         applicantInfo.setApplicantInfoResume(applicantInfoEntity.getApplicantInfoResume());
         return applicantInfo;
+    }
+
+    public ResponseMessage getResumeDeliveryRecord(Long userId) {
+        List<ResumeDeliveryRecordVo> resumeDeliveryRecord;
+        resumeDeliveryRecord = this.baseMapper.getResumeDeliveryRecord(userId);
+        if (resumeDeliveryRecord.isEmpty()) {
+            return ResponseMessage.failedMessage("没有记录!");
+        }
+        return ResponseMessage.successMessage(resumeDeliveryRecord);
     }
 
     public ResponseMessage updateApplicantInfo(ApplicantInfo applicantInfo) {

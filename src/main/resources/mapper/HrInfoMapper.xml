@@ -21,7 +21,7 @@
         <result column="job_requirement" property="jobRequirement"/>
         <result column="delivery_count" property="deliveryCount"/>
     </resultMap>
-    <select id="getReceiveRecord" resultMap="receiveRecord">
+    <select id="getResumeReceiveRecord" resultMap="receiveRecord">
         select  job.job_name,a.applicant_info_name,a.applicant_info_school,a.applicant_info_education,applicant_info_major,a.applicant_info_resume,temp.delivery_Datetime from job
         join
         (

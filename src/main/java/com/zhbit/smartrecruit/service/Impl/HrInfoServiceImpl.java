@@ -91,9 +91,9 @@ public class HrInfoServiceImpl extends ServiceImpl<HrInfoDao, HrInfoEntity> impl
         return ResponseMessage.failedMessage();
     }
 
-    public ResponseMessage getReceiveRecord(Long userId) {
+    public ResponseMessage getResumeReceiveRecord(Long userId) {
         List<ReceiveRecordVo> receiveRecord;
-        receiveRecord = this.baseMapper.getReceiveRecord(userId);
+        receiveRecord = this.baseMapper.getResumeReceiveRecord(userId);
         if (receiveRecord.isEmpty()) {
             return ResponseMessage.failedMessage("没有记录!");
         }

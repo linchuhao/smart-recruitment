@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 public interface HrInfoDao extends BaseMapper<HrInfoEntity> {
-    List<ReceiveRecordVo> getReceiveRecord(Long userId);
+    List<ReceiveRecordVo> getResumeReceiveRecord(Long userId);
 
     List<JobDeliveryRecordVo> getJobDeliveryRecord(Long userId);
 }

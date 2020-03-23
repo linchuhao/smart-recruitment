@@ -34,5 +34,6 @@
             enterprise ON hr.hr_info_enterprise_id = enterprise.enterprise_id
         WHERE
             applicant.applicant_info_id = #{userId}
+        ORDER BY mapping.delivery_datetime DESC
     </select>
 </mapper>

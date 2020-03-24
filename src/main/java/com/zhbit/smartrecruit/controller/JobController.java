@@ -1,11 +1,10 @@
 package com.zhbit.smartrecruit.controller;
 
+import com.zhbit.smartrecruit.data.dto.JobInfo;
 import com.zhbit.smartrecruit.data.vo.ResponseMessage;
 import com.zhbit.smartrecruit.service.JobService;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -26,5 +25,11 @@ public class JobController {
     @ApiOperation("获取所有热门职位信息")
     public ResponseMessage getHotJob() {
         return ResponseMessage.successMessage(jobService.getHotJob());
+    }
+
+    @PostMapping("/deliveryJobInfo")
+    @ApiOperation("发布职位信息")
+    public ResponseMessage deliveryJobInfo(@RequestBody JobInfo jobInfo) {
+        return jobService.deliveryJobInfo(jobInfo);
     }
 }

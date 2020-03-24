@@ -16,7 +16,7 @@ public class JobEntity {
 
     private String jobName;
 
-    private String jobFrom;
+    private Long jobFrom;
 
     private int jobMinSalary;
 

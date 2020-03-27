@@ -28,10 +28,10 @@ public class HrInfoController {
         return hrInfoService.getResumeReceiveRecord(userId);
     }
 
-    @GetMapping("/getJobDeliveryRecord")
+    @GetMapping("/getJobReleaseRecord")
     @ApiOperation("获取职位发布记录")
-    public ResponseMessage getJobDeliveryRecord(@RequestParam Long userId) {
-        return hrInfoService.getJobDeliveryRecord(userId);
+    public ResponseMessage getJobReleaseRecord(@RequestParam Long userId) {
+        return hrInfoService.getJobReleaseRecord(userId);
     }
 
     @PostMapping("/updateHrInfo")

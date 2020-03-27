@@ -6,7 +6,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class JobDeliveryRecordVo {
+public class JobReleaseRecordVo {
 
     public Long jobId;
 

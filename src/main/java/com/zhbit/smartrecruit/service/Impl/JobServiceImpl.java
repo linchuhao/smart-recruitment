@@ -30,7 +30,7 @@ public class JobServiceImpl extends ServiceImpl<JobDao, JobEntity> implements Jo
         return job;
     }
 
-    public ResponseMessage deliveryJobInfo(JobInfo jobInfo) {
+    public ResponseMessage releaseJobInfo(JobInfo jobInfo) {
         JobEntity jobEntity = new JobEntity();
         jobEntity.setJobFrom(jobInfo.getJobFrom());
         jobEntity.setJobName(jobInfo.getJobName());

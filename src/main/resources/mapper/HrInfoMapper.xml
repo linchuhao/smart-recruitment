@@ -10,7 +10,7 @@
         <result column="applicant_info_Major" property="applicantInfoMajor"/>
         <result column="delivery_datetime" property="deliveryDatetime"/>
     </resultMap>
-    <resultMap type="com.zhbit.smartrecruit.data.vo.JobDeliveryRecordVo" id="jobDeliveryRecord">
+    <resultMap type="com.zhbit.smartrecruit.data.vo.JobReleaseRecordVo" id="jobReleaseRecord">
         <id column="job_name" property="jobName"/>
         <result column="job_name" property="jobName"/>
         <result column="job_property" property="jobProperty"/>
@@ -54,7 +54,7 @@
                 AND job.job_id = temp.job_id
         ORDER BY temp.delivery_Datetime DESC
     </select>
-    <select id="getJobDeliveryRecord" resultMap="jobDeliveryRecord">
+    <select id="getJobReleaseRecord" resultMap="jobReleaseRecord">
         SELECT
             job.job_name,
             job.job_property,

@@ -27,9 +27,15 @@ public class JobController {
         return ResponseMessage.successMessage(jobService.getHotJob());
     }
 
-    @PostMapping("/deliveryJobInfo")
+    @PostMapping("/releaseJobInfo")
     @ApiOperation("发布职位信息")
-    public ResponseMessage deliveryJobInfo(@RequestBody JobInfo jobInfo) {
-        return jobService.deliveryJobInfo(jobInfo);
+    public ResponseMessage releaseJobInfo(@RequestBody JobInfo jobInfo) {
+        return jobService.releaseJobInfo(jobInfo);
+    }
+
+    @PostMapping("/searchJobInfo")
+    @ApiOperation("搜索职位信息")
+    public ResponseMessage searchJobInfo(@RequestParam String jobName) {
+        return ResponseMessage.successMessage("to do");
     }
 }

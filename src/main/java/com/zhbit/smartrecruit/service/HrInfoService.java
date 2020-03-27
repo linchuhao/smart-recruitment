@@ -16,5 +16,5 @@ public interface HrInfoService extends IService<HrInfoEntity> {
 
     ResponseMessage getResumeReceiveRecord(Long userId);
 
-    ResponseMessage getJobDeliveryRecord(Long userId);
+    ResponseMessage getJobReleaseRecord(Long userId);
 }

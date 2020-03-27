@@ -13,6 +13,6 @@ public interface JobService extends IService<JobEntity> {
 
     List<JobEntity> getHotJob();
 
-    ResponseMessage deliveryJobInfo(JobInfo jobInfo);
+    ResponseMessage releaseJobInfo(JobInfo jobInfo);
 
 }

@@ -24,34 +24,64 @@
         <result column="delivery_count" property="deliveryCount"/>
     </resultMap>
     <select id="getResumeReceiveRecord" resultMap="receiveRecord">
-        select  job.job_name,a.applicant_info_name,a.applicant_info_school,a.applicant_info_education,applicant_info_major,a.applicant_info_resume,temp.delivery_Datetime from job
-        join
-        (
-        select * from mapping_applicant_job where mapping_applicant_job.job_id in (select job_id from job where job.job_from = #{userId})
-        ) as temp
-        join applicant_info as a
-        join hr_info as hr
-        on a.applicant_info_id = temp.applicant_info_id
-        and hr.hr_info_id = job.job_from
-        and job.job_id = temp.job_id
-        order by temp.delivery_Datetime desc
+        SELECT
+            job.job_name,
+            a.applicant_info_name,
+            a.applicant_info_school,
+            a.applicant_info_education,
+            applicant_info_major,
+            a.applicant_info_resume,
+            temp.delivery_Datetime
+        FROM
+            job
+                JOIN
+            (SELECT
+                *
+            FROM
+                mapping_applicant_job
+            WHERE
+                mapping_applicant_job.job_id IN (SELECT
+                        job_id
+                    FROM
+                        job
+                    WHERE
+                        job.job_from = #{userId})) AS temp
+                JOIN
+            applicant_info AS a
+                JOIN
+            hr_info AS hr ON a.applicant_info_id = temp.applicant_info_id
+                AND hr.hr_info_id = job.job_from
+                AND job.job_id = temp.job_id
+        ORDER BY temp.delivery_Datetime DESC
     </select>
     <select id="getJobDeliveryRecord" resultMap="jobDeliveryRecord">
-        select job.job_name,job.job_property,job.job_education,job.job_experience,job.job_min_salary,job.job_max_salary,job.job_city,job.job_datetime,job.job_requirement,temp.delivery_count from job
-        join
-            (
-                select job.job_id,temp1.delivery_count from job
-                left join
-                (
-                    SELECT job_id, count(*) delivery_count FROM mapping_applicant_job
-                    group by job_id
-                )as temp1
-                on	job.job_id = temp1.job_id
-                where job.job_from = #{userId}
-            )as temp
-        on job.job_from = #{userId}
-        and job.job_id = temp.job_id
-        order by job.job_datetime desc;
+        SELECT
+            job.job_name,
+            job.job_property,
+            job.job_education,
+            job.job_experience,
+            job.job_min_salary,
+            job.job_max_salary,
+            job.job_city,
+            job.job_datetime,
+            job.job_requirement,
+            temp.delivery_count
+        FROM
+            job
+                JOIN
+            (SELECT
+                job.job_id, temp1.delivery_count
+            FROM
+                job
+            LEFT JOIN (SELECT
+                job_id, COUNT(*) delivery_count
+            FROM
+                mapping_applicant_job
+            GROUP BY job_id) AS temp1 ON job.job_id = temp1.job_id
+            WHERE
+                job.job_from = #{userId}) AS temp ON job.job_from = #{userId}
+                AND job.job_id = temp.job_id
+        ORDER BY job.job_datetime DESC;
     </select>
 
 </mapper>

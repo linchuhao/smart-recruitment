@@ -99,11 +99,11 @@ public class HrInfoServiceImpl extends ServiceImpl<HrInfoDao, HrInfoEntity> impl
         return ResponseMessage.successMessage(receiveRecord);
     }
     public ResponseMessage getJobReleaseRecord(Long userId) {
-        List<JobReleaseRecordVo> jobDeliveryRecord;
-        jobDeliveryRecord = this.baseMapper.getJobReleaseRecord(userId);
-        if (jobDeliveryRecord.isEmpty()) {
+        List<JobReleaseRecordVo> jobReleaseRecordVo;
+        jobReleaseRecordVo = this.baseMapper.getJobReleaseRecord(userId);
+        if (jobReleaseRecordVo.isEmpty()) {
             return ResponseMessage.failedMessage("没有记录!");
         }
-        return ResponseMessage.successMessage(jobDeliveryRecord);
+        return ResponseMessage.successMessage(jobReleaseRecordVo);
     }
 }

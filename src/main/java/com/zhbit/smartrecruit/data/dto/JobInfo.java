@@ -18,6 +18,10 @@ public class JobInfo {
 
     private int jobMaxSalary;
 
+    private String jobEducation;
+
+    private String jobExperience;
+
     private String jobCity;
 
     private String jobAddress;

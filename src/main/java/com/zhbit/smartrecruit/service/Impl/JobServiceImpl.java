@@ -37,6 +37,8 @@ public class JobServiceImpl extends ServiceImpl<JobDao, JobEntity> implements Jo
         jobEntity.setJobProperty(jobInfo.getJobProperty());
         jobEntity.setJobMinSalary(jobInfo.getJobMinSalary());
         jobEntity.setJobMaxSalary(jobInfo.getJobMaxSalary());
+        jobEntity.setJobEducation(jobInfo.getJobEducation());
+        jobEntity.setJobExperience(jobInfo.getJobExperience());
         jobEntity.setJobCity(jobInfo.getJobCity());
         jobEntity.setJobAddress(jobInfo.getJobAddress());
         // to do

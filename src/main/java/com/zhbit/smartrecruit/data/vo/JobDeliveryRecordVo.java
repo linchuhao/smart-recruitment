@@ -8,6 +8,10 @@ import java.time.LocalDateTime;
 @Data
 public class JobDeliveryRecordVo {
 
+    public Long jobId;
+
+    public Long jobFrom;
+
     public String jobName;
 
     public String jobProperty;
@@ -15,6 +19,10 @@ public class JobDeliveryRecordVo {
     public int jobMinSalary;
 
     public int jobMaxSalary;
+
+    public String jobEducation;
+
+    public String jobExperience;
 
     public String jobCity;
 

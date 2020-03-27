@@ -22,9 +22,11 @@ public class JobEntity {
 
     private int jobMaxSalary;
 
-    private String jobAddress;
+    private String jobEducation;
 
-    private String jobImg;
+    private String jobExperience;
+
+    private String jobAddress;
 
     private String jobCity;
 

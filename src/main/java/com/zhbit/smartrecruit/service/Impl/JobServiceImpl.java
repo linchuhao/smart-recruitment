@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zhbit.smartrecruit.dao.JobDao;
 import com.zhbit.smartrecruit.data.dto.JobInfo;
 import com.zhbit.smartrecruit.data.entity.JobEntity;
+import com.zhbit.smartrecruit.data.vo.JobReleaseRecordVo;
 import com.zhbit.smartrecruit.data.vo.ResponseMessage;
 import com.zhbit.smartrecruit.service.JobService;
 import org.springframework.stereotype.Service;
@@ -51,5 +52,14 @@ public class JobServiceImpl extends ServiceImpl<JobDao, JobEntity> implements Jo
             return ResponseMessage.successMessage("职位发布成功！");
         }
         return ResponseMessage.failedMessage("职位发布失败！");
+    }
+
+    public ResponseMessage searchJobInfo(String jobName) {
+        List<JobReleaseRecordVo> jobReleaseRecord;
+        jobReleaseRecord = this.baseMapper.searchJobInfo(jobName);
+        if (jobReleaseRecord.isEmpty()) {
+            return ResponseMessage.failedMessage("没有记录!");
+        }
+        return ResponseMessage.successMessage(jobReleaseRecord);
     }
 }

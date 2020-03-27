@@ -8,29 +8,33 @@ import java.time.LocalDateTime;
 @Data
 public class JobReleaseRecordVo {
 
-    public Long jobId;
+    private Long jobId;
 
-    public Long jobFrom;
+    private String jobFrom;
 
-    public String jobName;
+    private String enterpriseName;
 
-    public String jobProperty;
+    private String enterpriseLogo;
 
-    public int jobMinSalary;
+    private String jobName;
 
-    public int jobMaxSalary;
+    private String jobProperty;
 
-    public String jobEducation;
+    private int jobMinSalary;
 
-    public String jobExperience;
+    private int jobMaxSalary;
 
-    public String jobCity;
+    private String jobEducation;
+
+    private String jobExperience;
+
+    private String jobCity;
 
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
-    public LocalDateTime jobDatetime;
+    private LocalDateTime jobDatetime;
 
-    public String jobRequirement;
+    private String jobRequirement;
 
-    public int deliveryCount;
+    private int deliveryCount;
 
 }

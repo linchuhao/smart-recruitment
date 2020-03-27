@@ -33,9 +33,9 @@ public class JobController {
         return jobService.releaseJobInfo(jobInfo);
     }
 
-    @PostMapping("/searchJobInfo")
+    @GetMapping("/searchJobInfo")
     @ApiOperation("搜索职位信息")
     public ResponseMessage searchJobInfo(@RequestParam String jobName) {
-        return ResponseMessage.successMessage("to do");
+        return jobService.searchJobInfo(jobName);
     }
 }

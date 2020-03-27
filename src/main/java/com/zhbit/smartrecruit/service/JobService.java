@@ -15,4 +15,6 @@ public interface JobService extends IService<JobEntity> {
 
     ResponseMessage releaseJobInfo(JobInfo jobInfo);
 
+    ResponseMessage searchJobInfo(String jobName);
+
 }

@@ -42,8 +42,7 @@ public class JobServiceImpl extends ServiceImpl<JobDao, JobEntity> implements Jo
         jobEntity.setJobExperience(jobInfo.getJobExperience());
         jobEntity.setJobCity(jobInfo.getJobCity());
         jobEntity.setJobAddress(jobInfo.getJobAddress());
-        // to do
-        //把职位要求按段切分，然后填进html的标签里面
+        jobEntity.setJobResponsibility(jobInfo.getJobResponsibility());
         jobEntity.setJobRequirement(jobInfo.getJobRequirement());
         jobEntity.setJobDatetime(LocalDateTime.now());
         jobEntity.setJobIsActive(true);

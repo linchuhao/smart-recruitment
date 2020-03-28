@@ -9,11 +9,13 @@
         <result column="enterprise_logo" property="enterpriseLogo"/>
         <result column="job_name" property="jobName"/>
         <result column="job_property" property="jobProperty"/>
+        <result column="job_responsibility" property="jobResponsibility"/>
         <result column="job_min_salary" property="jobMinSalary"/>
         <result column="job_max_salary" property="jobMaxSalary"/>
         <result column="job_education" property="jobEducation"/>
         <result column="job_experience" property="jobExperience"/>
         <result column="job_city" property="jobCity"/>
+        <result column="job_address" property="jobAddress"/>
         <result column="job_datetime" property="jobDatetime"/>
         <result column="job_requirement" property="jobRequirement"/>
         <result column="delivery_count" property="deliveryCount"/>
@@ -31,7 +33,9 @@
             job.job_min_salary,
             job.job_max_salary,
             job.job_city,
+            job.job_address,
             job.job_datetime,
+            job.job_responsibility,
             job.job_requirement,
             deliveryRecord.delivery_count
         FROM

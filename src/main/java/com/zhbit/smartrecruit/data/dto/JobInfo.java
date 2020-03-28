@@ -14,6 +14,8 @@ public class JobInfo {
 
     private String jobProperty;
 
+    private String jobResponsibility;
+
     private int jobMinSalary;
 
     private int jobMaxSalary;

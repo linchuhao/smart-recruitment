@@ -30,8 +30,12 @@ public class JobReleaseRecordVo {
 
     private String jobCity;
 
+    private String jobAddress;
+
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private LocalDateTime jobDatetime;
+
+    private String jobResponsibility;
 
     private String jobRequirement;
 

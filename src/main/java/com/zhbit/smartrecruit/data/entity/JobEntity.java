@@ -32,6 +32,8 @@ public class JobEntity {
 
     private String jobProperty;
 
+    private String jobResponsibility;
+
     private String jobRequirement;
 
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")

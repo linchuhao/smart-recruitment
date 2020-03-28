@@ -38,9 +38,9 @@
             (SELECT
                 *
             FROM
-                mapping_applicant_job
+                delivery_record
             WHERE
-                mapping_applicant_job.job_id IN (SELECT
+                delivery_record.job_id IN (SELECT
                         job_id
                     FROM
                         job
@@ -76,7 +76,7 @@
             LEFT JOIN (SELECT
                 job_id, COUNT(*) delivery_count
             FROM
-                mapping_applicant_job
+                delivery_record
             GROUP BY job_id) AS temp1 ON job.job_id = temp1.job_id
             WHERE
                 job.job_from = #{userId}) AS temp ON job.job_from = #{userId}

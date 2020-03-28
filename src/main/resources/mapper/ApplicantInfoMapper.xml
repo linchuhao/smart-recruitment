@@ -25,7 +25,7 @@
         FROM
             applicant_info applicant
                 JOIN
-            mapping_applicant_job mapping ON applicant.applicant_info_id = mapping.applicant_info_id
+            delivery_record mapping ON applicant.applicant_info_id = mapping.applicant_info_id
                 JOIN
             job ON job.job_id = mapping.job_id
                 JOIN

@@ -52,7 +52,7 @@
             LEFT JOIN (SELECT
                 job_id, COUNT(*) delivery_count
             FROM
-                mapping_applicant_job
+                delivery_record
             GROUP BY job_id) AS record ON job.job_id = record.job_id) AS deliveryRecord ON job.job_name LIKE "%"#{jobName}"%"
                 AND job.job_id = deliveryRecord.job_id
         ORDER BY job.job_datetime DESC;

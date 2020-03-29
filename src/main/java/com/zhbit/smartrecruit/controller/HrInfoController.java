@@ -1,6 +1,7 @@
 package com.zhbit.smartrecruit.controller;
 
 import com.zhbit.smartrecruit.data.dto.HrInfo;
+import com.zhbit.smartrecruit.data.dto.JobInfo;
 import com.zhbit.smartrecruit.data.vo.ResponseMessage;
 import com.zhbit.smartrecruit.service.HrInfoService;
 import io.swagger.annotations.ApiOperation;
@@ -38,6 +39,12 @@ public class HrInfoController {
     @ApiOperation("修改HR信息")
     public ResponseMessage updateHrInfo(@RequestBody HrInfo hrInfo) {
         return hrInfoService.updateHrInfo(hrInfo);
+    }
+
+    @PostMapping("/updateJobInfo")
+    @ApiOperation("修改职位信息")
+    public ResponseMessage updateJobInfo(@RequestBody JobInfo jobInfo) {
+        return hrInfoService.updateJobInfo(jobInfo);
     }
 
     @PostMapping("/uploadHrInfoAvatar")

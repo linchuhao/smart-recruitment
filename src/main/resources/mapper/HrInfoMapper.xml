@@ -11,7 +11,8 @@
         <result column="delivery_datetime" property="deliveryDatetime"/>
     </resultMap>
     <resultMap type="com.zhbit.smartrecruit.data.vo.JobReleaseRecordVo" id="jobReleaseRecord">
-        <id column="job_name" property="jobName"/>
+        <id column="job_id" property="jobId"/>
+        <result column="job_id" property="jobId"/>
         <result column="job_name" property="jobName"/>
         <result column="job_property" property="jobProperty"/>
         <result column="job_education" property="jobEducation"/>
@@ -19,8 +20,10 @@
         <result column="job_min_salary" property="jobMinSalary"/>
         <result column="job_max_salary" property="jobMaxSalary"/>
         <result column="job_city" property="jobCity"/>
-        <result column="job_datetime" property="jobDatetime"/>
+        <result column="job_address" property="jobAddress"/>
         <result column="job_requirement" property="jobRequirement"/>
+        <result column="job_responsibility" property="jobResponsibility"/>
+        <result column="job_datetime" property="jobDatetime"/>
         <result column="delivery_count" property="deliveryCount"/>
     </resultMap>
     <select id="getResumeReceiveRecord" resultMap="receiveRecord">
@@ -56,6 +59,7 @@
     </select>
     <select id="getJobReleaseRecord" resultMap="jobReleaseRecord">
         SELECT
+            job.job_id,
             job.job_name,
             job.job_property,
             job.job_education,
@@ -63,8 +67,10 @@
             job.job_min_salary,
             job.job_max_salary,
             job.job_city,
-            job.job_datetime,
+            job.job_address,
+            job.job_responsibility,
             job.job_requirement,
+            job.job_datetime,
             temp.delivery_count
         FROM
             job

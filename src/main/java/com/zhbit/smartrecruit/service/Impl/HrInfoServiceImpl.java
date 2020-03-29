@@ -3,8 +3,11 @@ package com.zhbit.smartrecruit.service.Impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zhbit.smartrecruit.dao.EnterpriseDao;
 import com.zhbit.smartrecruit.dao.HrInfoDao;
+import com.zhbit.smartrecruit.dao.JobDao;
 import com.zhbit.smartrecruit.data.dto.HrInfo;
+import com.zhbit.smartrecruit.data.dto.JobInfo;
 import com.zhbit.smartrecruit.data.entity.HrInfoEntity;
+import com.zhbit.smartrecruit.data.entity.JobEntity;
 import com.zhbit.smartrecruit.data.vo.JobReleaseRecordVo;
 import com.zhbit.smartrecruit.data.vo.ReceiveRecordVo;
 import com.zhbit.smartrecruit.data.vo.ResponseMessage;
@@ -15,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -22,6 +26,9 @@ public class HrInfoServiceImpl extends ServiceImpl<HrInfoDao, HrInfoEntity> impl
 
     @Resource
     EnterpriseDao enterpriseDao;
+
+    @Resource
+    JobDao jobDao;
 
     @Resource
     UserInfoServiceImpl userInfoServiceImpl;
@@ -58,6 +65,28 @@ public class HrInfoServiceImpl extends ServiceImpl<HrInfoDao, HrInfoEntity> impl
         hrInfoEntity.setHrInfoEducation(hrInfo.getHrInfoEducation());
         hrInfoEntity.setHrInfoSchool(hrInfo.getHrInfoSchool());
         boolean result = this.baseMapper.updateById(hrInfoEntity) > 0;
+        if (result) {
+            return ResponseMessage.successMessage("修改成功");
+        }
+        return ResponseMessage.failedMessage("修改失败");
+    }
+
+    public ResponseMessage updateJobInfo(JobInfo jobInfo) {
+        JobEntity jobEntity = new JobEntity();
+        jobEntity.setJobId(jobInfo.getJobId());
+        jobEntity.setJobName(jobInfo.getJobName());
+        jobEntity.setJobProperty(jobInfo.getJobProperty());
+        jobEntity.setJobMinSalary(jobInfo.getJobMinSalary());
+        jobEntity.setJobMaxSalary(jobInfo.getJobMaxSalary());
+        jobEntity.setJobEducation(jobInfo.getJobEducation());
+        jobEntity.setJobExperience(jobInfo.getJobExperience());
+        jobEntity.setJobCity(jobInfo.getJobCity());
+        jobEntity.setJobAddress(jobInfo.getJobAddress());
+        jobEntity.setJobResponsibility(jobInfo.getJobResponsibility());
+        jobEntity.setJobRequirement(jobInfo.getJobRequirement());
+        jobEntity.setJobDatetime(LocalDateTime.now());
+        jobEntity.setJobIsActive(true);
+        boolean result = jobDao.updateById(jobEntity) > 0;
         if (result) {
             return ResponseMessage.successMessage("修改成功");
         }

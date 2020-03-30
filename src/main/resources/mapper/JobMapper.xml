@@ -4,7 +4,7 @@
     <resultMap type="com.zhbit.smartrecruit.data.vo.JobReleaseRecordVo" id="jobReleaseRecord">
         <id column="job_id" property="jobId"/>
         <result column="job_id" property="jobId"/>
-        <result column="hr_info_name" property="jobFrom"/>
+        <result column="hr_info_name" property="hrName"/>
         <result column="enterprise_name" property="enterpriseName"/>
         <result column="enterprise_logo" property="enterpriseLogo"/>
         <result column="job_name" property="jobName"/>
@@ -23,6 +23,7 @@
     <select id="searchJobInfo" resultMap="jobReleaseRecord">
         SELECT
             job.job_id,
+            job.job_from,
             enterprise.enterprise_name,
             enterprise.enterprise_logo,
             hr.hr_info_name,

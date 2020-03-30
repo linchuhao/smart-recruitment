@@ -1,6 +1,7 @@
 package com.zhbit.smartrecruit.controller;
 
 import com.zhbit.smartrecruit.data.dto.ApplicantInfo;
+import com.zhbit.smartrecruit.data.dto.DeliveryRecord;
 import com.zhbit.smartrecruit.data.vo.ResponseMessage;
 import com.zhbit.smartrecruit.service.ApplicantInfoService;
 import io.swagger.annotations.ApiOperation;
@@ -45,5 +46,11 @@ public class ApplicantInfoController {
     @ApiOperation("上传应聘者简历")
     public ResponseMessage uploadApplicantInfoResume(@RequestParam MultipartFile resume, @RequestParam Long userId) {
         return applicantInfoService.uploadApplicantInfoResume(resume,userId);
+    }
+
+    @PostMapping("/deliverResume")
+    @ApiOperation("投递简历")
+    public ResponseMessage deliverResume(@RequestBody DeliveryRecord deliveryRecord) {
+        return applicantInfoService.deliverResume(deliveryRecord);
     }
 }

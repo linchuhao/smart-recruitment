@@ -10,7 +10,7 @@ public class JobReleaseRecordVo {
 
     private Long jobId;
 
-    private String jobFrom;
+    private String hrName;
 
     private String enterpriseName;
 

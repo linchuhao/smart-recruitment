@@ -1,21 +1,30 @@
 package com.zhbit.smartrecruit.service.Impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zhbit.smartrecruit.dao.ApplicantDao;
+import com.zhbit.smartrecruit.dao.DeliveryRecordDao;
 import com.zhbit.smartrecruit.data.dto.ApplicantInfo;
+import com.zhbit.smartrecruit.data.dto.DeliveryRecord;
 import com.zhbit.smartrecruit.data.entity.ApplicantInfoEntity;
+import com.zhbit.smartrecruit.data.entity.DeliveryRecordEntity;
 import com.zhbit.smartrecruit.data.vo.ResponseMessage;
 import com.zhbit.smartrecruit.data.vo.ResumeDeliveryRecordVo;
 import com.zhbit.smartrecruit.service.ApplicantInfoService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class AppliacntInfoServiceImpl extends ServiceImpl<ApplicantDao, ApplicantInfoEntity> implements ApplicantInfoService {
+public class ApplicantInfoServiceImpl extends ServiceImpl<ApplicantDao, ApplicantInfoEntity> implements ApplicantInfoService {
+
+    @Resource
+    DeliveryRecordDao deliveryRecordDao;
 
     public ApplicantInfo getApplicantInfo(Long userId) {
         ApplicantInfoEntity applicantInfoEntity = this.baseMapper.selectById(userId);
@@ -92,6 +101,30 @@ public class AppliacntInfoServiceImpl extends ServiceImpl<ApplicantDao, Applican
         }catch (IOException e) {
             return ResponseMessage.failedMessage();
         }
+    }
+
+    public ResponseMessage deliverResume(DeliveryRecord deliveryRecord) {
+        //判断deliveryRecord表中有没有存在该记录，避免重复投递
+        if (existDeliveryRecord(deliveryRecord)){
+            return ResponseMessage.failedMessage("您已经投递过了，请不要重复投递");
+        }
+        DeliveryRecordEntity deliveryRecordEntity = new DeliveryRecordEntity();
+        deliveryRecordEntity.setApplicantInfoId(deliveryRecord.getApplicantInfoId());
+        deliveryRecordEntity.setJobId(deliveryRecord.getJobId());
+        deliveryRecordEntity.setDeliveryDatetime(LocalDateTime.now());
+        boolean result =  deliveryRecordDao.insert(deliveryRecordEntity) > 0;
+        if (result) {
+            return ResponseMessage.successMessage("投递成功");
+        }
+        return ResponseMessage.failedMessage("投递失败");
+    }
+
+    private boolean existDeliveryRecord(DeliveryRecord deliveryRecord) {
+        QueryWrapper<DeliveryRecordEntity> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().eq(DeliveryRecordEntity::getApplicantInfoId,deliveryRecord.getApplicantInfoId())
+                .eq(DeliveryRecordEntity::getJobId,deliveryRecord.getJobId());
+        DeliveryRecordEntity deliveryRecordEntity = deliveryRecordDao.selectOne(queryWrapper);
+        return deliveryRecordEntity != null;
     }
 
     private ResponseMessage saveFilePath(String type, String relativePath, Long userId) {

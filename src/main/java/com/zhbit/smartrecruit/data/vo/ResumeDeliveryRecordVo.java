@@ -14,7 +14,7 @@ public class ResumeDeliveryRecordVo {
 
     private String jobName;
 
-    private String jobProperty;
+    private String jobType;
 
     private int jobMinSalary;
 

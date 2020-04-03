@@ -12,7 +12,7 @@ public class JobInfo {
 
     private String jobName;
 
-    private String jobProperty;
+    private String jobType;
 
     private String jobResponsibility;
 

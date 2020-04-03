@@ -27,10 +27,22 @@ public class JobController {
         return ResponseMessage.successMessage(jobService.getHotJob());
     }
 
+    @GetMapping("/getJobReleaseRecord")
+    @ApiOperation("获取职位发布记录")
+    public ResponseMessage getJobReleaseRecord(@RequestParam Long userId) {
+        return jobService.getJobReleaseRecord(userId);
+    }
+
     @PostMapping("/releaseJobInfo")
     @ApiOperation("发布职位信息")
     public ResponseMessage releaseJobInfo(@RequestBody JobInfo jobInfo) {
         return jobService.releaseJobInfo(jobInfo);
+    }
+
+    @PostMapping("/updateJobInfo")
+    @ApiOperation("修改职位信息")
+    public ResponseMessage updateJobInfo(@RequestBody JobInfo jobInfo) {
+        return jobService.updateJobInfo(jobInfo);
     }
 
     @GetMapping("/searchJobInfo")

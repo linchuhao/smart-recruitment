@@ -75,7 +75,7 @@ public class HrInfoServiceImpl extends ServiceImpl<HrInfoDao, HrInfoEntity> impl
         JobEntity jobEntity = new JobEntity();
         jobEntity.setJobId(jobInfo.getJobId());
         jobEntity.setJobName(jobInfo.getJobName());
-        jobEntity.setJobProperty(jobInfo.getJobProperty());
+        jobEntity.setJobType(jobInfo.getJobType());
         jobEntity.setJobMinSalary(jobInfo.getJobMinSalary());
         jobEntity.setJobMaxSalary(jobInfo.getJobMaxSalary());
         jobEntity.setJobEducation(jobInfo.getJobEducation());
@@ -119,20 +119,4 @@ public class HrInfoServiceImpl extends ServiceImpl<HrInfoDao, HrInfoEntity> impl
         return ResponseMessage.failedMessage();
     }
 
-    public ResponseMessage getResumeReceiveRecord(Long userId) {
-        List<ReceiveRecordVo> receiveRecord;
-        receiveRecord = this.baseMapper.getResumeReceiveRecord(userId);
-        if (receiveRecord.isEmpty()) {
-            return ResponseMessage.failedMessage("没有记录!");
-        }
-        return ResponseMessage.successMessage(receiveRecord);
-    }
-    public ResponseMessage getJobReleaseRecord(Long userId) {
-        List<JobReleaseRecordVo> jobReleaseRecordVo;
-        jobReleaseRecordVo = this.baseMapper.getJobReleaseRecord(userId);
-        if (jobReleaseRecordVo.isEmpty()) {
-            return ResponseMessage.failedMessage("没有记录!");
-        }
-        return ResponseMessage.successMessage(jobReleaseRecordVo);
-    }
 }

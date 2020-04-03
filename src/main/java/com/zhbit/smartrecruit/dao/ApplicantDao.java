@@ -9,5 +9,4 @@ import java.util.List;
 
 @Service
 public interface ApplicantDao extends BaseMapper<ApplicantInfoEntity> {
-    List<ResumeDeliveryRecordVo> getResumeDeliveryRecord(Long userId);
 }

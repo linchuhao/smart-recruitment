@@ -30,7 +30,7 @@ public class JobEntity {
 
     private String jobCity;
 
-    private String jobProperty;
+    private String jobType;
 
     private String jobResponsibility;
 

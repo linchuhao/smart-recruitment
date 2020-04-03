@@ -9,16 +9,5 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface ApplicantInfoService extends IService<ApplicantInfoEntity> {
 
-    ApplicantInfo getApplicantInfo(Long userId);
-
-    ResponseMessage getResumeDeliveryRecord(Long userId);
-
-    ResponseMessage updateApplicantInfo(ApplicantInfo applicantInfo);
-
-    ResponseMessage uploadApplicantInfoAvatar(MultipartFile avatar, Long userId);
-
-    ResponseMessage uploadApplicantInfoResume(MultipartFile avatar, Long userId);
-
-    ResponseMessage deliverResume(DeliveryRecord deliveryRecord);
 
 }

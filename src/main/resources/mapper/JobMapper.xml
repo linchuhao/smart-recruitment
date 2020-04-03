@@ -8,7 +8,7 @@
         <result column="enterprise_name" property="enterpriseName"/>
         <result column="enterprise_logo" property="enterpriseLogo"/>
         <result column="job_name" property="jobName"/>
-        <result column="job_property" property="jobProperty"/>
+        <result column="job_type" property="jobType"/>
         <result column="job_responsibility" property="jobResponsibility"/>
         <result column="job_min_salary" property="jobMinSalary"/>
         <result column="job_max_salary" property="jobMaxSalary"/>
@@ -28,7 +28,7 @@
             enterprise.enterprise_logo,
             hr.hr_info_name,
             job.job_name,
-            job.job_property,
+            job.job_type,
             job.job_education,
             job.job_experience,
             job.job_min_salary,
@@ -56,6 +56,38 @@
                 delivery_record
             GROUP BY job_id) AS record ON job.job_id = record.job_id) AS deliveryRecord ON job.job_name LIKE "%"#{jobName}"%"
                 AND job.job_id = deliveryRecord.job_id
+        ORDER BY job.job_datetime DESC;
+    </select>
+    <select id="getJobReleaseRecord" resultMap="jobReleaseRecord">
+        SELECT
+            job.job_id,
+            job.job_name,
+            job.job_type,
+            job.job_education,
+            job.job_experience,
+            job.job_min_salary,
+            job.job_max_salary,
+            job.job_city,
+            job.job_address,
+            job.job_responsibility,
+            job.job_requirement,
+            job.job_datetime,
+            temp.delivery_count
+        FROM
+            job
+                JOIN
+            (SELECT
+                job.job_id, temp1.delivery_count
+            FROM
+                job
+            LEFT JOIN (SELECT
+                job_id, COUNT(*) delivery_count
+            FROM
+                delivery_record
+            GROUP BY job_id) AS temp1 ON job.job_id = temp1.job_id
+            WHERE
+                job.job_from = #{userId}) AS temp ON job.job_from = #{userId}
+                AND job.job_id = temp.job_id
         ORDER BY job.job_datetime DESC;
     </select>
 

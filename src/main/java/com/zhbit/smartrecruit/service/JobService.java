@@ -13,7 +13,11 @@ public interface JobService extends IService<JobEntity> {
 
     List<JobEntity> getHotJob();
 
+    ResponseMessage getJobReleaseRecord(Long userId);
+
     ResponseMessage releaseJobInfo(JobInfo jobInfo);
+
+    ResponseMessage updateJobInfo(JobInfo jobInfo);
 
     ResponseMessage searchJobInfo(String jobName);
 

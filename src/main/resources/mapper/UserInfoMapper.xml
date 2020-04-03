@@ -1,6 +1,117 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zhbit.smartrecruit.dao.UserInfoDao">
-
+    <resultMap type="com.zhbit.smartrecruit.data.dto.UserInfoDTO" id="userInfo">
+        <id column="user_info_id" property="userInfoId"/>
+        <result column="user_info_id" property="userInfoId"/>
+        <result column="user_info_role" property="userInfoRole"/>
+        <result column="user_info_nickname" property="userInfoNickname"/>
+        <result column="enterprise_name" property="userInfoEnterpriseName"/>
+        <result column="user_info_position" property="userInfoPosition"/>
+        <result column="user_info_phone" property="userInfoPhone"/>
+        <result column="user_info_email" property="userInfoEmail"/>
+        <result column="user_info_school" property="userInfoSchool"/>
+        <result column="user_info_education" property="userInfoEducation"/>
+        <result column="user_info_sex" property="userInfoSex"/>
+        <result column="user_info_age" property="userInfoAge"/>
+        <result column="user_info_avatar" property="userInfoAvatar"/>
+        <result column="user_info_city" property="userInfoCity"/>
+        <result column="user_info_introduction" property="userInfoIntroduction"/>
+        <result column="user_info_resume" property="userInfoResume"/>
+    </resultMap>
+    <resultMap type="com.zhbit.smartrecruit.data.vo.ReceiveRecordVo" id="receiveRecord">
+        <id column="job_name" property="jobName"/>
+        <result column="user_info_nickname" property="applicantInfoName"/>
+        <result column="user_info_resume" property="applicantInfoResume"/>
+        <result column="user_info_school" property="applicantInfoSchool"/>
+        <result column="user_info_education" property="applicantInfoEducation"/>
+        <result column="user_info_major" property="applicantInfoMajor"/>
+        <result column="user_info_datetime" property="deliveryDatetime"/>
+    </resultMap>
+    <resultMap type="com.zhbit.smartrecruit.data.vo.ResumeDeliveryRecordVo" id="resumeDeliveryRecordVo">
+        <id column="job_id" property="jobId"/>
+        <result column="job_id" property="jobId"/>
+        <result column="job_name" property="jobName"/>
+        <result column="enterprise_name" property="enterpriseName"/>
+        <result column="job_type" property="jobType"/>
+        <result column="job_min_salary" property="jobMinSalary"/>
+        <result column="job_max_salary" property="jobMaxSalary"/>
+        <result column="job_city" property="jobCity"/>
+        <result column="delivery_datetime" property="deliveryDatetime"/>
+    </resultMap>
+    <select id="getUserInfo" resultMap="userInfo">
+        SELECT
+            u.user_info_id,
+            u.user_info_role,
+            u.user_info_nickname,
+            enterprise.enterprise_name,
+            u.user_info_position,
+            u.user_info_phone,
+            u.user_info_email,
+            u.user_info_school,
+            u.user_info_education,
+            u.user_info_sex,
+            u.user_info_age,
+            u.user_info_avatar,
+            u.user_info_city,
+            u.user_info_introduction,
+            u.user_info_resume
+        FROM
+            user_info AS u
+                LEFT JOIN
+            enterprise ON u.user_info_enterprise_id = enterprise.enterprise_id
+        WHERE
+            u.user_info_id = #{userId}
+    </select>
+    <select id="getResumeReceiveRecord" resultMap="receiveRecord">
+        SELECT
+            job.job_name,
+            u.user_info_nickname,
+            u.user_info_school,
+            u.user_info_education,
+            u.user_info_major,
+            u.user_info_resume,
+            temp.delivery_datetime
+        FROM
+            job
+                JOIN
+            (SELECT
+                *
+            FROM
+                delivery_record
+            WHERE
+                delivery_record.job_id IN (SELECT
+                        job_id
+                    FROM
+                        job
+                    WHERE
+                        job.job_from = #{userId})) AS temp
+                JOIN
+            user_info AS u ON u.user_info_id = temp.applicant_id
+                AND job.job_id = temp.job_id
+        ORDER BY temp.delivery_Datetime DESC
+    </select>
+    <select id="getResumeDeliveryRecord" resultMap="resumeDeliveryRecordVo">
+        SELECT
+        delivery.job_id,
+        enterprise.enterprise_name,
+        job.job_name,
+        job.job_type,
+        job.job_min_salary,
+        job.job_max_salary,
+        job.job_city,
+        delivery.delivery_datetime
+    FROM
+        delivery_record AS delivery
+            JOIN
+        job ON delivery.job_id = job.job_id
+            JOIN
+        user_info AS u ON u.user_info_id = job.job_from
+            JOIN
+        enterprise ON enterprise.enterprise_id = u.user_info_enterprise_id
+    WHERE
+        delivery.applicant_id = #{userId}
+    ORDER BY delivery.delivery_Datetime DESC
+    </select>
 
 </mapper>

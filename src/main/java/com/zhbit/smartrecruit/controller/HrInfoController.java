@@ -17,40 +17,6 @@ public class HrInfoController {
     @Resource
     HrInfoService hrInfoService;
 
-    @GetMapping("/getHrInfo")
-    @ApiOperation("获取HR信息")
-    public HrInfo getHrInfo(@RequestParam Long userId) {
-        return hrInfoService.getHrInfo(userId);
-    }
 
-    @GetMapping("/getResumeReceiveRecord")
-    @ApiOperation("获取简历接收记录")
-    public ResponseMessage getResumeReceiveRecord(@RequestParam Long userId) {
-        return hrInfoService.getResumeReceiveRecord(userId);
-    }
 
-    @GetMapping("/getJobReleaseRecord")
-    @ApiOperation("获取职位发布记录")
-    public ResponseMessage getJobReleaseRecord(@RequestParam Long userId) {
-        return hrInfoService.getJobReleaseRecord(userId);
-    }
-
-    @PostMapping("/updateHrInfo")
-    @ApiOperation("修改HR信息")
-    public ResponseMessage updateHrInfo(@RequestBody HrInfo hrInfo) {
-        return hrInfoService.updateHrInfo(hrInfo);
-    }
-
-    @PostMapping("/updateJobInfo")
-    @ApiOperation("修改职位信息")
-    public ResponseMessage updateJobInfo(@RequestBody JobInfo jobInfo) {
-        return hrInfoService.updateJobInfo(jobInfo);
-    }
-
-    @PostMapping("/uploadHrInfoAvatar")
-    @ApiOperation("上传HR头像")
-    public ResponseMessage uploadHrInfoAvatar(@RequestParam MultipartFile avatar, @RequestParam Long userId) {
-        return hrInfoService.uploadHrInfoAvatar(avatar,userId);
-    }
-
-}
+}  

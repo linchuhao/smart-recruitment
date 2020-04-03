@@ -31,11 +31,20 @@ public class JobServiceImpl extends ServiceImpl<JobDao, JobEntity> implements Jo
         return job;
     }
 
+    public ResponseMessage getJobReleaseRecord(Long userId) {
+        List<JobReleaseRecordVo> jobReleaseRecordVo;
+        jobReleaseRecordVo = this.baseMapper.getJobReleaseRecord(userId);
+        if (jobReleaseRecordVo.isEmpty()) {
+            return ResponseMessage.failedMessage("没有记录!");
+        }
+        return ResponseMessage.successMessage(jobReleaseRecordVo);
+    }
+
     public ResponseMessage releaseJobInfo(JobInfo jobInfo) {
         JobEntity jobEntity = new JobEntity();
         jobEntity.setJobFrom(jobInfo.getJobFrom());
         jobEntity.setJobName(jobInfo.getJobName());
-        jobEntity.setJobProperty(jobInfo.getJobProperty());
+        jobEntity.setJobType(jobInfo.getJobType());
         jobEntity.setJobMinSalary(jobInfo.getJobMinSalary());
         jobEntity.setJobMaxSalary(jobInfo.getJobMaxSalary());
         jobEntity.setJobEducation(jobInfo.getJobEducation());
@@ -51,6 +60,28 @@ public class JobServiceImpl extends ServiceImpl<JobDao, JobEntity> implements Jo
             return ResponseMessage.successMessage("职位发布成功！");
         }
         return ResponseMessage.failedMessage("职位发布失败！");
+    }
+
+    public ResponseMessage updateJobInfo(JobInfo jobInfo) {
+        JobEntity jobEntity = new JobEntity();
+        jobEntity.setJobId(jobInfo.getJobId());
+        jobEntity.setJobName(jobInfo.getJobName());
+        jobEntity.setJobType(jobInfo.getJobType());
+        jobEntity.setJobMinSalary(jobInfo.getJobMinSalary());
+        jobEntity.setJobMaxSalary(jobInfo.getJobMaxSalary());
+        jobEntity.setJobEducation(jobInfo.getJobEducation());
+        jobEntity.setJobExperience(jobInfo.getJobExperience());
+        jobEntity.setJobCity(jobInfo.getJobCity());
+        jobEntity.setJobAddress(jobInfo.getJobAddress());
+        jobEntity.setJobResponsibility(jobInfo.getJobResponsibility());
+        jobEntity.setJobRequirement(jobInfo.getJobRequirement());
+        jobEntity.setJobDatetime(LocalDateTime.now());
+        jobEntity.setJobIsActive(true);
+        boolean result = this.baseMapper.updateById(jobEntity) > 0;
+        if (result) {
+            return ResponseMessage.successMessage("修改成功");
+        }
+        return ResponseMessage.failedMessage("修改失败");
     }
 
     public ResponseMessage searchJobInfo(String jobName) {

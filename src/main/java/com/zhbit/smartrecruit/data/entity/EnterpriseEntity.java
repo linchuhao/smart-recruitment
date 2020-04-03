@@ -18,11 +18,7 @@ public class EnterpriseEntity {
 
     private String enterpriseLogo;
 
-    private String enterpriseImg;
-
     private String enterpriseCity;
-
-    private String enterpriseProperty;
 
     private String enterpriseIntroduction;
 

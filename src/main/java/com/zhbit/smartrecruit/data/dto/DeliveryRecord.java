@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Data
 public class DeliveryRecord {
 
-    private Long applicantInfoId;
+    private Long applicantId;
     /*
     to do
     后面需要向这个hrInfoId关联的信息table发送一条消息，表示我给他投递了简历

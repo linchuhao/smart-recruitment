@@ -15,7 +15,7 @@ public class DeliveryRecordEntity {
     @TableId(type = IdType.AUTO)
     private Long deliveryRecordId;
 
-    private Long applicantInfoId;
+    private Long applicantId;
 
     private Long jobId;
 

@@ -1,20 +1,10 @@
-package com.zhbit.smartrecruit.data.entity;
+package com.zhbit.smartrecruit.data.dto;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 @Data
-@TableName("user_info")
-public class UserInfoEntity {
-
-    @TableId(type = IdType.AUTO)
+public class UserInfoDTO {
     private Long userInfoId;
-
-    private String userInfoUsername;
-
-    private String userInfoPassword;
     /*
     userInfoRole
     1: applicant
@@ -26,7 +16,7 @@ public class UserInfoEntity {
 
     private String userInfoNickname;
 
-    private Long userInfoEnterpriseId;
+    private String userInfoEnterpriseName;
     //职务
     private String userInfoPosition;
 
@@ -50,5 +40,4 @@ public class UserInfoEntity {
 
     private String userInfoResume;
 
-    private boolean userInfoIsActive;
 }

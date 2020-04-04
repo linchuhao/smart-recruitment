@@ -4,7 +4,7 @@
     <resultMap type="com.zhbit.smartrecruit.data.vo.JobReleaseRecordVo" id="jobReleaseRecord">
         <id column="job_id" property="jobId"/>
         <result column="job_id" property="jobId"/>
-        <result column="hr_info_name" property="hrName"/>
+        <result column="user_info_nickname" property="hrName"/>
         <result column="enterprise_name" property="enterpriseName"/>
         <result column="enterprise_logo" property="enterpriseLogo"/>
         <result column="job_name" property="jobName"/>
@@ -26,7 +26,7 @@
             job.job_from,
             enterprise.enterprise_name,
             enterprise.enterprise_logo,
-            hr.hr_info_name,
+            hr.user_info_nickname,
             job.job_name,
             job.job_type,
             job.job_education,
@@ -42,9 +42,9 @@
         FROM
             job
                 JOIN
-            hr_info AS hr ON job.job_from = hr.hr_info_id
+            user_info AS hr ON job.job_from = hr.user_info_id
                 JOIN
-            enterprise ON enterprise.enterprise_id = hr.hr_info_enterprise_id
+            enterprise ON enterprise.enterprise_id = hr.user_info_enterprise_id
                 JOIN
             (SELECT
                 job.job_id, record.delivery_count

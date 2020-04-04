@@ -12,17 +12,17 @@ public class UserMsgVo {
 
     private Long userMsgFrom;
 
-    private String sender;
-
     private String enterpriseName;
+
+    private String sender;
 
     private String userMsgTitle;
 
-    private String userMsgBody;
+    private String userMsgContent;
 
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private LocalDateTime userMsgSendDatetime;
 
-    private boolean userMsgIsRead;
+    private boolean userMsgStatus;
 
 }

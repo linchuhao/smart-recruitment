@@ -11,6 +11,7 @@
         <result column="user_info_phone" property="userInfoPhone"/>
         <result column="user_info_email" property="userInfoEmail"/>
         <result column="user_info_school" property="userInfoSchool"/>
+        <result column="user_info_major" property="userInfoMajor"/>
         <result column="user_info_education" property="userInfoEducation"/>
         <result column="user_info_sex" property="userInfoSex"/>
         <result column="user_info_age" property="userInfoAge"/>
@@ -26,7 +27,7 @@
         <result column="user_info_school" property="applicantInfoSchool"/>
         <result column="user_info_education" property="applicantInfoEducation"/>
         <result column="user_info_major" property="applicantInfoMajor"/>
-        <result column="user_info_datetime" property="deliveryDatetime"/>
+        <result column="delivery_datetime" property="deliveryDatetime"/>
     </resultMap>
     <resultMap type="com.zhbit.smartrecruit.data.vo.ResumeDeliveryRecordVo" id="resumeDeliveryRecordVo">
         <id column="job_id" property="jobId"/>
@@ -49,6 +50,7 @@
             u.user_info_phone,
             u.user_info_email,
             u.user_info_school,
+            u.user_info_major,
             u.user_info_education,
             u.user_info_sex,
             u.user_info_age,

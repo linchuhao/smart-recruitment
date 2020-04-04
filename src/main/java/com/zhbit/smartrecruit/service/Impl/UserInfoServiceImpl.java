@@ -93,6 +93,7 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoDao, UserInfoEntity
     @Override
     public ResponseMessage updateUserInfo(UserInfoDTO userInfo) {
         UserInfoEntity userInfoEntity = new UserInfoEntity();
+        userInfoEntity.setUserInfoId(userInfo.getUserInfoId());
         userInfoEntity.setUserInfoNickname(userInfo.getUserInfoNickname());
         userInfoEntity.setUserInfoPosition(userInfo.getUserInfoPosition());
         userInfoEntity.setUserInfoPhone(userInfo.getUserInfoPhone());
@@ -102,6 +103,7 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoDao, UserInfoEntity
         userInfoEntity.setUserInfoEducation(userInfo.getUserInfoEducation());
         userInfoEntity.setUserInfoSchool(userInfo.getUserInfoSchool());
         userInfoEntity.setUserInfoEducation(userInfo.getUserInfoEducation());
+        userInfoEntity.setUserInfoMajor(userInfo.getUserInfoMajor());
         if (userInfo.getUserInfoRole() == 2){
             Long enterpriseId = searchEnterprise(userInfo.getUserInfoEnterpriseName());
             userInfoEntity.setUserInfoEnterpriseId(enterpriseId);

@@ -26,6 +26,8 @@ public class UserInfoDTO {
 
     private String userInfoSchool;
 
+    private String userInfoMajor;
+
     private String userInfoEducation;
 
     private String userInfoSex;

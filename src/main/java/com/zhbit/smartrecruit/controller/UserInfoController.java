@@ -28,7 +28,7 @@ public class UserInfoController {
         return userInfoService.getUserInfo(userId);
     }
 
-    @PostMapping("/updateUserInfoAvatar")
+    @PostMapping("/updateUserInfo")
     @ApiOperation("更改用户信息")
     public ResponseMessage updateUserInfo(@RequestBody UserInfoDTO userInfo) {
         return userInfoService.updateUserInfo(userInfo);

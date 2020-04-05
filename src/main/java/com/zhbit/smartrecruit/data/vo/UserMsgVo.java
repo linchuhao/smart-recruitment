@@ -20,8 +20,10 @@ public class UserMsgVo {
 
     private String userMsgContent;
 
+    private String userMsgAnnex;
+
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
-    private LocalDateTime userMsgSendDatetime;
+    private LocalDateTime userMsgCreateDatetime;
 
     private boolean userMsgStatus;
 

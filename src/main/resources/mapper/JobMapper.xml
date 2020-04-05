@@ -3,7 +3,7 @@
 <mapper namespace="com.zhbit.smartrecruit.dao.JobDao">
     <resultMap type="com.zhbit.smartrecruit.data.vo.JobReleaseRecordVo" id="jobReleaseRecord">
         <id column="job_id" property="jobId"/>
-        <result column="job_id" property="jobId"/>
+        <result column="job_from" property="jobFrom"/>
         <result column="user_info_nickname" property="hrName"/>
         <result column="enterprise_name" property="enterpriseName"/>
         <result column="enterprise_logo" property="enterpriseLogo"/>

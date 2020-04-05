@@ -6,9 +6,9 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zhbit.smartrecruit.dao.DeliveryRecordDao;
 import com.zhbit.smartrecruit.dao.EnterpriseDao;
 import com.zhbit.smartrecruit.dao.UserInfoDao;
+import com.zhbit.smartrecruit.dao.UserMsgDao;
 import com.zhbit.smartrecruit.data.dto.DeliveryRecord;
 import com.zhbit.smartrecruit.data.dto.UserDTO;
-import com.zhbit.smartrecruit.data.dto.UserInfo;
 import com.zhbit.smartrecruit.data.dto.UserInfoDTO;
 import com.zhbit.smartrecruit.data.entity.*;
 import com.zhbit.smartrecruit.data.vo.ReceiveRecordVo;
@@ -34,6 +34,9 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoDao, UserInfoEntity
     @Resource
     DeliveryRecordDao deliveryRecordDao;
 
+    @Resource
+    UserMsgDao userMsgDao;
+
     @Override
     public ResponseMessage register(UserDTO user) {
         boolean existUser = existUser(user);
@@ -41,6 +44,8 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoDao, UserInfoEntity
             UserInfoEntity userInfoEntity = new UserInfoEntity();
             userInfoEntity.setUserInfoUsername(user.getUsername());
             userInfoEntity.setUserInfoPassword(user.getPassword());
+            userInfoEntity.setUserInfoPhone(user.getPhone());
+            userInfoEntity.setUserInfoEmail(user.getEmail());
             userInfoEntity.setUserInfoRole(user.getRole());
             userInfoEntity.setUserInfoIsActive(true);
             //HR注册
@@ -153,9 +158,28 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoDao, UserInfoEntity
         deliveryRecordEntity.setDeliveryDatetime(LocalDateTime.now());
         boolean result =  deliveryRecordDao.insert(deliveryRecordEntity) > 0;
         if (result) {
+            this.sendDeliveryResumeMsg(deliveryRecord);
             return ResponseMessage.successMessage("投递成功");
         }
         return ResponseMessage.failedMessage("投递失败");
+    }
+
+    private void sendDeliveryResumeMsg(DeliveryRecord deliveryRecord) {
+        UserInfoEntity userInfo = this.baseMapper.selectById(deliveryRecord.getApplicantId());
+        MessageEntity messageEntity = new MessageEntity();
+        messageEntity.setMessageFrom(deliveryRecord.getApplicantId());
+        messageEntity.setMessageTo(deliveryRecord.getJobFrom());
+        messageEntity.setMessageTitle("简历投递");
+        messageEntity.setMessageContent(this.MessageContent(userInfo.getUserInfoNickname(),deliveryRecord.getJobName()));
+        messageEntity.setMessageAnnex(userInfo.getUserInfoResume());
+        messageEntity.setMessageCreateDatetime(LocalDateTime.now());
+        messageEntity.setMessageStatus(false);
+        messageEntity.setMessageIsActive(true);
+        userMsgDao.insert(messageEntity);
+    }
+
+    private String MessageContent(String nickName,String jobName) {
+        return nickName + "向您发布的" + jobName + "投递了简历，请查收！";
     }
 
     private boolean existDeliveryRecord(DeliveryRecord deliveryRecord) {

@@ -8,7 +8,9 @@
         <result column="user_info_nickname" property="sender"/>
         <result column="message_title" property="userMsgTitle"/>
         <result column="message_content" property="userMsgContent"/>
-        <result column="message_create_datetime" property="userMsgSendDatetime"/>
+        <result column="message_content" property="userMsgContent"/>
+        <result column="message_annex" property="userMsgAnnex"/>
+        <result column="message_create_datetime" property="userMsgCreateDatetime"/>
         <result column="message_status" property="userMsgStatus"/>
     </resultMap>
     <select id="getUserMsg" resultMap="UserMsgVo">
@@ -19,6 +21,7 @@
             u.user_info_nickname,
             message.message_title,
             message.message_content,
+            message.message_annex,
             message.message_create_datetime,
             message.message_status
         FROM
@@ -30,5 +33,6 @@
         WHERE
             message.message_to = #{userId}
                 AND message.message_is_active = 1
+        ORDER BY message.message_create_datetime desc
     </select>
 </mapper>

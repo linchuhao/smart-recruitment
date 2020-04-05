@@ -9,9 +9,7 @@ import java.util.List;
 
 public interface JobService extends IService<JobEntity> {
 
-    List<JobEntity> getAllJob();
-
-    List<JobEntity> getHotJob();
+    ResponseMessage getHotJobInfo();
 
     ResponseMessage getJobReleaseRecord(Long userId);
 

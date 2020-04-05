@@ -90,5 +90,30 @@
                 AND job.job_id = temp.job_id
         ORDER BY job.job_datetime DESC;
     </select>
-
+    <select id="getHotJobInfo" resultMap="jobReleaseRecord">
+        SELECT
+            job.job_id,
+            job.job_from,
+            enterprise.enterprise_name,
+            hr.user_info_nickname,
+            job.job_name,
+            job.job_type,
+            job.job_education,
+            job.job_experience,
+            job.job_min_salary,
+            job.job_max_salary,
+            job.job_city,
+            job.job_address,
+            job.job_datetime,
+            job.job_responsibility,
+            job.job_requirement
+        FROM
+            job
+                JOIN
+            user_info AS hr ON hr.user_info_id = job_from
+                JOIN
+            enterprise ON enterprise_id = hr.user_info_enterprise_id
+        WHERE
+            job.job_is_hot = 1
+    </select>
 </mapper>

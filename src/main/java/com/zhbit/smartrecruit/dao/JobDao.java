@@ -10,4 +10,6 @@ public interface JobDao extends BaseMapper<JobEntity> {
     List<JobReleaseRecordVo> searchJobInfo(String jobName);
 
     List<JobReleaseRecordVo> getJobReleaseRecord(Long userId);
+
+    List<JobReleaseRecordVo> getHotJobInfo();
 }

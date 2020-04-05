@@ -15,16 +15,10 @@ public class JobController {
     @Resource
     JobService jobService;
 
-    @GetMapping("/getAllJob")
-    @ApiOperation("获取所有职位信息")
-    public ResponseMessage getAllJob() {
-        return ResponseMessage.successMessage(jobService.getAllJob());
-    }
-
-    @GetMapping("/getHotJob")
+    @GetMapping("/getHotJobInfo")
     @ApiOperation("获取所有热门职位信息")
-    public ResponseMessage getHotJob() {
-        return ResponseMessage.successMessage(jobService.getHotJob());
+    public ResponseMessage getHotJobInfo() {
+        return jobService.getHotJobInfo();
     }
 
     @GetMapping("/getJobReleaseRecord")

@@ -16,19 +16,13 @@ import java.util.stream.Collectors;
 @Service
 public class JobServiceImpl extends ServiceImpl<JobDao, JobEntity> implements JobService {
 
-    public List<JobEntity> getAllJob() {
-        List<JobEntity> job;
-        job = this.baseMapper.selectList(null)
-                .stream().filter(JobEntity::isJobIsActive)
-                .collect(Collectors.toList());
-        return job;
-    }
-
-    public List<JobEntity> getHotJob() {
-        List<JobEntity> job;
-        job = getAllJob().stream().filter(JobEntity::isJobIsHot)
-                .collect(Collectors.toList());
-        return job;
+    public ResponseMessage getHotJobInfo() {
+        List<JobReleaseRecordVo> jobReleaseRecordVo;
+        jobReleaseRecordVo = this.baseMapper.getHotJobInfo();
+        if (jobReleaseRecordVo.isEmpty()) {
+            return ResponseMessage.failedMessage("没有记录!");
+        }
+        return ResponseMessage.successMessage(jobReleaseRecordVo);
     }
 
     public ResponseMessage getJobReleaseRecord(Long userId) {
